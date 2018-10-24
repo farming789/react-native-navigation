@@ -103,12 +103,12 @@ function showModal(params = {}) {
   return platformSpecific.showModal(params);
 }
 
-function dismissModal(params = {}) {
-  return platformSpecific.dismissModal(params);
+async function dismissModal(params = {}) {
+  return await platformSpecific.dismissModal(params);
 }
 
-function dismissAllModals(params = {}) {
-  return platformSpecific.dismissAllModals(params);
+async function dismissAllModals(params = {}) {
+  return await platformSpecific.dismissAllModals(params);
 }
 
 function showSnackbar(params = {}) {

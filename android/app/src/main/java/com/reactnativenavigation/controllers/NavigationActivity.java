@@ -480,11 +480,30 @@ public class NavigationActivity extends AppCompatActivity implements DefaultHard
         });
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
-    public void requestPermissions(String[] permissions, int requestCode, PermissionListener listener) {
-        mPermissionListener = listener;
-        requestPermissions(permissions, requestCode);
-    }
+    //    @TargetApi(Build.VERSION_CODES.M)
+        //    public void requestPermissions(String[] permissions, int requestCode, PermissionListener listener) {
+        //        mPermissionListener = listener;
+        //        requestPermissions(permissions, requestCode);
+        //    }
+
+            @Override
+            public void requestPermissions(String[] permissions, int requestCode, PermissionListener listener) {
+                mPermissionListener = listener;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(permissions, requestCode);
+                }else {
+                    ActivityCompat.requestPermissions(this,permissions,requestCode);
+                }
+            }
+
+            @Override
+            public boolean shouldShowRequestPermissionRationale(@NonNull String permission) {
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    return super.shouldShowRequestPermissionRationale(permission);
+                }else {
+                    return ActivityCompat.shouldShowRequestPermissionRationale(this,permission);
+                }
+            }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
